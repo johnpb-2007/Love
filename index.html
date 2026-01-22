@@ -1,36 +1,190 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>For You ❤️</title>
+
   <style>
-    body {
-      background: linear-gradient(to right, pink, lavender);
-      font-family: Arial;
-      text-align: center;
-      padding: 40px;
+    * {
+      box-sizing: border-box;
     }
-    h1 { font-size: 3em; }
-    p { font-size: 1.3em; }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, pink, lavender);
+      overflow: hidden;
+    }
+
+    /* PASSWORD SCREEN */
+    #lockScreen {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(to right, #ffb6c1, #e6b3ff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+
+    .lockBox {
+      background: rgba(255,255,255,0.8);
+      padding: 40px;
+      border-radius: 20px;
+      text-align: center;
+      width: 300px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .lockBox h2 {
+      margin-bottom: 20px;
+    }
+
+    .lockBox input {
+      padding: 10px;
+      width: 100%;
+      border-radius: 10px;
+      border: none;
+      margin-bottom: 15px;
+      font-size: 1em;
+    }
+
+    .lockBox button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      background: hotpink;
+      color: white;
+      font-size: 1em;
+      cursor: pointer;
+    }
+
+    .error {
+      color: red;
+      margin-top: 10px;
+      display: none;
+    }
+
+    /* MAIN CONTENT */
+    #content {
+      display: none;
+      padding: 40px;
+      text-align: center;
+      color: #4b004b;
+    }
+
+    h1 {
+      font-size: 3em;
+    }
+
+    .letter {
+      max-width: 700px;
+      margin: auto;
+      background: rgba(255,255,255,0.6);
+      padding: 30px;
+      border-radius: 15px;
+      line-height: 1.7;
+      font-size: 1.2em;
+    }
+
+    /* FLOATING HEARTS */
+    .heart {
+      position: fixed;
+      bottom: -20px;
+      font-size: 20px;
+      animation: floatUp linear forwards;
+      pointer-events: none;
+    }
+
+    @keyframes floatUp {
+      to {
+        transform: translateY(-110vh);
+        opacity: 0;
+      }
+    }
   </style>
 </head>
+
 <body>
-  <h1>To My Love 💖</h1>
-  <p>
-    Hello my lil babiee  
-    This is my first love letter for you
-    I dont know what to write tbh, 
-    I LOVE YOU, I LOVE YOUR LIPS EVERYTHING, i love looking at you, i love your voice, your little touch.
-    I wanna hug u forever
-    tbh im not very good at expressing my love but i can assure u i can love u like u loose your might when we are alone
-    my first love letter, it will get better for your
-    ik i could'nt come today, but i miss u so much i wanna make your eyes roll
-    im ready to accept any punishment you give me my princess
-    i sincerely beg your pardon love
-    with love(thinking of your lips)
-  </p>
-  <p>— Yours forever ❤️</p>
+
+  <!-- PASSWORD SCREEN -->
+  <div id="lockScreen">
+    <div class="lockBox">
+      <h2>🔐 Only for My Love</h2>
+      <input type="password" id="password" placeholder="Enter the secret ❤️">
+      <button onclick="unlock()">Unlock</button>
+      <div class="error" id="error">Wrong password 💔</div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div id="content">
+    <h1>To My Love 💖</h1>
+
+    <div class="letter">
+      <p>Hello my lil babiee ❤️</p>
+
+      <p>
+        This is my first love letter for you.  
+        I don’t really know what to write, but I know how I feel.
+      </p>
+
+      <p>
+        I love you.  
+        I love your lips, everything about you.  
+        I love looking at you.  
+        I love your voice, your little touch.
+      </p>
+
+      <p>
+        I want to hug you forever.
+      </p>
+
+      <p>
+        I may not be perfect at expressing my love,  
+        but I promise I’ll love you in ways that feel real, deep, and endless.
+      </p>
+
+      <p>
+        I miss you more than words can say.
+      </p>
+
+      <p>
+        Yours forever ❤️
+      </p>
+    </div>
+  </div>
+
+  <script>
+    const correctPassword = "iloveyou"; // CHANGE THIS ❤️
+
+    function unlock() {
+      const input = document.getElementById("password").value;
+      const error = document.getElementById("error");
+
+      if (input === correctPassword) {
+        document.getElementById("lockScreen").style.display = "none";
+        document.getElementById("content").style.display = "block";
+        startHearts();
+      } else {
+        error.style.display = "block";
+      }
+    }
+
+    function startHearts() {
+      setInterval(() => {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 6000);
+      }, 300);
+    }
+  </script>
+
 </body>
 </html>
-
-
-
