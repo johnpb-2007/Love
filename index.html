@@ -5,9 +5,7 @@
   <title>For You ❤️</title>
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -15,6 +13,7 @@
       font-family: Arial, sans-serif;
       background: linear-gradient(to right, pink, lavender);
       overflow: hidden;
+      color: #4b004b;
     }
 
     /* PASSWORD SCREEN */
@@ -35,10 +34,6 @@
       text-align: center;
       width: 300px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    }
-
-    .lockBox h2 {
-      margin-bottom: 20px;
     }
 
     .lockBox input {
@@ -62,8 +57,8 @@
 
     .error {
       color: red;
-      margin-top: 10px;
       display: none;
+      margin-top: 10px;
     }
 
     /* MAIN CONTENT */
@@ -71,7 +66,6 @@
       display: none;
       padding: 40px;
       text-align: center;
-      color: #4b004b;
     }
 
     h1 {
@@ -86,6 +80,7 @@
       border-radius: 15px;
       line-height: 1.7;
       font-size: 1.2em;
+      min-height: 350px;
     }
 
     /* FLOATING HEARTS */
@@ -102,6 +97,19 @@
         transform: translateY(-110vh);
         opacity: 0;
       }
+    }
+
+    /* CURSOR */
+    .cursor {
+      display: inline-block;
+      width: 8px;
+      background: #4b004b;
+      margin-left: 3px;
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
     }
   </style>
 </head>
@@ -121,50 +129,39 @@
   <!-- MAIN CONTENT -->
   <div id="content">
     <h1>To My Love 💖</h1>
-
     <div class="letter">
-      <p>Hello my lil babiee ❤️</p>
-
-      <p>
-        This is my first love letter for you.  
-        Its a bit clumsy but i hope u love it.
-      </p>
-
-      <p>
-        I love you.  
-        I love your lips, everything about you.  
-        I love looking at you.  
-        I love your voice, your little touch.
-      </p>
-
-      <p>
-        I want to hug you forever.
-        Everyday at school i spent most of the admiring you mylady
-      </p>
-
-      <p>
-        I may not very good at expressing my love,  
-        but I promise I’ll love you in ways that feel heaven, deep, and endless.
-      </p>
-
-      <p>
-        I miss you so much i wanna make you roll your eyes screaming.
-      </p>
-      
-      <p>
-        Ik i could'nt come today, i swear to make it upto you
-        i accept any punishment you give me love
-        i sincerely beg your pardon my queen
-      </p>
-
-      <p>
-        Yours forever ❤️
-      </p>
+      <span id="typedText"></span><span class="cursor"></span>
     </div>
   </div>
 
   <script>
     const correctPassword = "iloveyou"; // CHANGE THIS ❤️
+
+    const text = `
+Hello my lil babiee ❤️
+
+This is my first love letter for you.  
+Its a bit clumsy but i hope u love it.
+
+I love you.  
+I love your lips, everything about you.  
+I love looking at you.  
+I love your voice, your little touch.
+
+I want to hug you forever.
+Everyday at school i spent most of the admiring you mylady
+
+I may not very good at expressing my love,  
+but I promise I’ll love you in ways that feel heaven, deep, and endless.
+
+I miss you so much i wanna make you roll your eyes screaming.
+
+Ik i could'nt come today, i swear to make it upto you
+i accept any punishment you give me love
+i sincerely beg your pardon my queen
+
+Yours forever ❤️
+`;
 
     function unlock() {
       const input = document.getElementById("password").value;
@@ -174,9 +171,24 @@
         document.getElementById("lockScreen").style.display = "none";
         document.getElementById("content").style.display = "block";
         startHearts();
+        typeText();
       } else {
         error.style.display = "block";
       }
+    }
+
+    function typeText() {
+      const el = document.getElementById("typedText");
+      let i = 0;
+
+      function typing() {
+        if (i < text.length) {
+          el.innerHTML += text[i] === "\n" ? "<br>" : text[i];
+          i++;
+          setTimeout(typing, 35);
+        }
+      }
+      typing();
     }
 
     function startHearts() {
@@ -187,7 +199,6 @@
         heart.style.left = Math.random() * 100 + "vw";
         heart.style.animationDuration = (3 + Math.random() * 3) + "s";
         document.body.appendChild(heart);
-
         setTimeout(() => heart.remove(), 6000);
       }, 300);
     }
@@ -195,5 +206,3 @@
 
 </body>
 </html>
-
-
