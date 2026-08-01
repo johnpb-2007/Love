@@ -4,7 +4,7 @@ import type { StoryPage } from "@/components/interactive";
  * code stays untouched. Private photos can be placed in public/images. */
 export const galleryMemories = [
   {
-    caption: "That unmistakable glow",
+    caption: "Hehehe my cure kitten..",
     note: "A place for the photo that makes you stop and smile every time.",
     imageUrl: "/images/1.png",
   },
