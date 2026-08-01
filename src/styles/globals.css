@@ -1,0 +1,117 @@
+/* Self-hosted fonts (no runtime Google Fonts request). Curated weights only
+   -- see docs/DESIGN_PLAN.md for which role each family plays. */
+@import "@fontsource/cormorant-garamond/400.css";
+@import "@fontsource/cormorant-garamond/400-italic.css";
+@import "@fontsource/cormorant-garamond/600.css";
+@import "@fontsource/quicksand/400.css";
+@import "@fontsource/quicksand/500.css";
+@import "@fontsource/quicksand/600.css";
+@import "@fontsource/caveat/400.css";
+@import "@fontsource/caveat/600.css";
+
+@import "./tokens.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-sakura-blush/20;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-ink-navy text-paper-cream font-body antialiased;
+  }
+
+  /* Reduced-motion users get instant scrolling and no ambient parallax --
+     honored globally here; individual Framer Motion components handle
+     their own spring-vs-fade swap via useReducedMotionVariants (Phase 6). */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  ::selection {
+    @apply bg-lantern-rose/40 text-paper-cream;
+  }
+
+  /* Visible, on-theme focus ring -- never remove focus outlines outright. */
+  :focus-visible {
+    outline: 2px solid theme("colors.moonlight-gold");
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  /* Shared vertical rhythm so every section (Hero, Gallery, Letter, ...)
+     lines up without each one choosing its own padding. */
+  .section-padding {
+    @apply px-6 py-24 sm:px-10 md:px-16 lg:px-24;
+  }
+
+  /* Glass-morphism surface used by Card's "glass" variant and by modals /
+     the letter envelope. One definition, reused, per the design-system brief. */
+  .glass-panel {
+    @apply bg-twilight-plum/40 backdrop-blur-xl border border-paper-cream/10 shadow-lift-paper;
+  }
+
+  /* Hook points for the custom cursor built in Phase 4. Defined here so
+     Phase 4 only has to add/remove these classes, not invent new CSS. */
+  .custom-cursor-active {
+    cursor: none;
+  }
+  .custom-cursor-active a,
+  .custom-cursor-active button,
+  .cursor-interactive {
+    cursor: none;
+  }
+
+  .ambient-star {
+    animation: ambient-twinkle 4s ease-in-out infinite;
+  }
+
+  .ambient-petal {
+    animation-name: ambient-petal-fall;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+}
+
+@keyframes ambient-twinkle {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scale(0.7);
+  }
+  50% {
+    opacity: 0.95;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes ambient-petal-fall {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translate3d(8vw, 120vh, 0) rotate(360deg);
+    opacity: 0;
+  }
+}

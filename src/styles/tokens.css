@@ -1,0 +1,30 @@
+/**
+ * Color variables mirror tailwind.config.ts exactly (see docs/DESIGN_PLAN.md
+ * for the palette rationale). Components should reach for Tailwind classes
+ * first (e.g. `bg-ink-navy`); these variables exist for the handful of
+ * places Tailwind classes can't reach -- inline SVG `fill`, canvas/confetti
+ * color arrays, or CSS you can't express with a class (gradients, masks).
+ *
+ * If a color ever changes, update it here AND in tailwind.config.ts --
+ * src/config/theme.ts documents this duplication and re-exports both
+ * for JS usage so there's one typed source of truth on the JS side.
+ */
+:root {
+  --color-ink-navy: #14102b;
+  --color-twilight-plum: #2c1b47;
+  --color-sakura-blush: #ffb6d5;
+  --color-moonlight-gold: #f4c868;
+  --color-paper-cream: #fff6ea;
+  --color-lantern-rose: #ff6f91;
+
+  /* Spacing scale follows Tailwind's default 4px rhythm; the only addition
+     is a named "section" gap so every section shares one vertical rhythm
+     instead of each one picking its own py-* value. */
+  --space-section-y: 6rem;
+
+  /* Spring "feel" values, expressed as CSS custom properties so the numbers
+     in docs/DESIGN_PLAN.md, src/lib/motion.ts (Framer Motion), and any raw
+     CSS transition all agree. Framer Motion reads the .ts versions; these
+     exist for the rare plain-CSS transition (e.g. a hover on a link). */
+  --ease-spring-out: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
