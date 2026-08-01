@@ -3,10 +3,26 @@ import type { StoryPage } from "@/components/interactive";
 /** Personalise strings and optional image URLs here; section and interaction
  * code stays untouched. Private photos can be placed in public/images. */
 export const galleryMemories = [
-  { caption: "That unmistakable glow", note: "A place for the photo that makes you stop and smile every time.", imageUrl: undefined },
-  { caption: "A little adventure", note: "For the ordinary day that somehow became one of your favourites.", imageUrl: undefined },
-  { caption: "The laugh I remember", note: "The kind that is impossible not to catch from across the room.", imageUrl: undefined },
-  { caption: "A forever kind of moment", note: "One small memory, held close for a very long time.", imageUrl: undefined },
+  {
+    caption: "That unmistakable glow",
+    note: "A place for the photo that makes you stop and smile every time.",
+    imageUrl: "/images/1.png",
+  },
+  {
+    caption: "A little adventure",
+    note: "For the ordinary day that somehow became one of your favourites.",
+    imageUrl: "/images/2.png",
+  },
+  {
+    caption: "The laugh I remember",
+    note: "The kind that is impossible not to catch from across the room.",
+    imageUrl: "/images/3.png",
+  },
+  {
+    caption: "A forever kind of moment",
+    note: "One small memory, held close for a very long time.",
+    imageUrl: "/images/4.png",
+  },
 ] as const;
 
 export const reasons = [
